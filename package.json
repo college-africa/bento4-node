@@ -1,6 +1,6 @@
 {
-  "name": "bento4-installer",
-  "version": "1.0.8",
+  "name": "bento4-node",
+  "version": "1.0.9",
   "description": "Installs bento4 executables as a node module and provides a path to the bin folder",
   "main": "./src/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/markusdaehn/node-bento4-installer.git"
+    "url": "git+https://github.com/college-africa/bento4-node.git"
   },
   "keywords": [
     "bento4",
@@ -21,9 +21,9 @@
   "author": "Markus Daehn <markus.daehn@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/markusdaehn/node-bento4-installer/issues"
+    "url": "https://github.com/college-africa/bento4-node/issues"
   },
-  "homepage": "https://github.com/markusdaehn/node-bento4-installer#readme",
+  "homepage": "https://github.com/college-africa/bento4-node",
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-plugin-mocha": "^4.9.0",

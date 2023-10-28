@@ -1,16 +1,18 @@
-# node-bento4-installer
+# bento4-node
 This is a simple bento4 installer node module. The bento4 binaries is installed with the module and provides paths to them.
+
+This package is an updated version of [bento4-installer](https://www.npmjs.com/package/bento4-installer). It was created because the author of bento4-installer has not updated the package or attended to pull request for a while.
 
 ## Installation
 ```js
-npm i --save bento4-installer
+npm i --save bento4-node
 ```
 
 ## Usage
 When the `bento4-installer` is required, as seen below, it returns an object that has the paths to the platform specific executables.
 
 ```js
-const bento4 = require('bento4-installer')
+const bento4 = require('bento4-node')
 ```
 The bento4 object returned has the following properties:
 

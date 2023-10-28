@@ -2,7 +2,7 @@ const os = require('os')
 const bento4 = require('./index.js')
 const equal = require('assert').deepEqual
 
-describe('bento4-installer', function() {
+describe('bento4-node', function() {
   const platform = os.platform() + '-' + os.arch()
   it('should set the platform correctly', () => {
     equal(bento4.platform, os.platform() === 'darwin' ? 'darwin' : platform)

@@ -40,7 +40,7 @@ function getExecutableFiles() {
 
 function getModuleRootPath() {
   // NPM 2
-  let rootPath = path.resolve(__dirname, 'node_modules', 'bento4-installer')
+  let rootPath = path.resolve(__dirname, 'node_modules', 'bento4-node')
 
   // NPM 3
   if (isDirectory(rootPath) === false) {
