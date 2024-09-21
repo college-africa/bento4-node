@@ -1,6 +1,6 @@
 {
   "name": "bento4-node",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Installs bento4 executables as a node module and provides a path to the bin folder",
   "main": "./src/index.js",
   "scripts": {
