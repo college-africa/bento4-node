@@ -1,8 +1,8 @@
 /*****************************************************************
 |
-|    AP4 - odhe Atom
+|    AP4 - dac3 Atoms
 |
-|    Copyright 2002-2008 Axiomatic Systems, LLC
+|    Copyright 2002-2019 Axiomatic Systems, LLC
 |
 |
 |    This file is part of Bento4/AP4 (MP4 Atom Processing Library).
@@ -26,62 +26,62 @@
 |
 ****************************************************************/
 
-#ifndef _AP4_ODHE_ATOM_H_
-#define _AP4_ODHE_ATOM_H_
+#ifndef _AP4_DAC3_ATOM_H_
+#define _AP4_DAC3_ATOM_H_
 
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
-#include "Ap4Types.h"
 #include "Ap4Atom.h"
-#include "Ap4ContainerAtom.h"
-#include "Ap4String.h"
+#include "Ap4Array.h"
 
 /*----------------------------------------------------------------------
-|   class references
+|   constants
 +---------------------------------------------------------------------*/
-class AP4_OhdrAtom;
 
 /*----------------------------------------------------------------------
-|   AP4_OdheAtom
+|   AP4_Dac3Atom
 +---------------------------------------------------------------------*/
-class AP4_OdheAtom : public AP4_ContainerAtom
+class AP4_Dac3Atom : public AP4_Atom
 {
 public:
-    AP4_IMPLEMENT_DYNAMIC_CAST_D(AP4_OdheAtom, AP4_ContainerAtom)
+    AP4_IMPLEMENT_DYNAMIC_CAST_D(AP4_Dac3Atom, AP4_Atom)
+
+    // types
+    struct StreamInfo {
+        unsigned int fscod;
+        unsigned int bsid;
+        unsigned int bsmod;
+        unsigned int acmod;
+        unsigned int lfeon;
+        unsigned int bit_rate_code;
+    };
 
     // class methods
-    static AP4_OdheAtom* Create(AP4_Size         size, 
-                                AP4_ByteStream&  stream, 
-                                AP4_AtomFactory& atom_factory);
+    static AP4_Dac3Atom* Create(AP4_Size size, AP4_ByteStream& stream);
 
-    // constructor
-    /**
-     * @param ohdr ohdr atom passed with transfer of ownership semantics
-     */
-    AP4_OdheAtom(const char* content_type, AP4_OhdrAtom* ohdr);
-                 
-    // AP4_Atom methods
+    // constructors
+    AP4_Dac3Atom(const AP4_Dac3Atom& other);
+    AP4_Dac3Atom(const StreamInfo* StreamInfo);  // DSI vaiable initialize m_RawBytes (SpecificBoxInfo -> m_RawBytes)
+
+    // methods
     virtual AP4_Result InspectFields(AP4_AtomInspector& inspector);
     virtual AP4_Result WriteFields(AP4_ByteStream& stream);
-    
-    // AP4_AtomParent methods
-    virtual void OnChildChanged(AP4_Atom* child);
-    
-    // methods
-    const AP4_String& GetContentType() { return m_ContentType; }
-    
+    virtual AP4_Atom* Clone() { return new AP4_Dac3Atom(m_Size32, m_RawBytes.GetData()); }
+
+    // accessors
+    const AP4_DataBuffer& GetRawBytes()   const { return m_RawBytes;   }
+    unsigned int          GetDataRate()   const { return m_DataRate;   }
+    const StreamInfo&     GetStreamInfo() const { return m_StreamInfo; }
+
 private:
     // methods
-    AP4_OdheAtom(AP4_UI32         size, 
-                 AP4_UI08         version,
-                 AP4_UI32         flags,
-                 AP4_ByteStream&  stream,
-                 AP4_AtomFactory& atom_factory);
-
+    AP4_Dac3Atom(AP4_UI32 size, const AP4_UI08* payload);  // box data initialize m_Dsi (m_RawBytes -> SpecificBoxInfo)
+    
     // members
-    AP4_String m_ContentType;
-
+    unsigned int   m_DataRate;
+    StreamInfo     m_StreamInfo;
+    AP4_DataBuffer m_RawBytes;
 };
 
-#endif // _AP4_ODHE_ATOM_H_
+#endif // _AP4_DAC3_ATOM_H_
